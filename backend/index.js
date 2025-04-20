@@ -5,9 +5,13 @@ import dotenv from 'dotenv';
 import studentRoutes from './routes/students.js';
 
 dotenv.config();
-
+const corsOptions = {
+  origin: ['https://cse-2-134-assignment-2-12nn.vercel.app'], // Allow only this domain
+  methods: ['GET', 'POST'], // Allow GET and POST methods
+  credentials: true, // Allow credentials like cookies or headers
+};
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI, {
