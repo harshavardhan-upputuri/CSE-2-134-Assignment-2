@@ -19,7 +19,9 @@ function AddStudent() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/students', student);
+    // Use the VITE_APP_BACKEND_BASEURL environment variable
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
+    await axios.post(`${backendUrl}/students`, student);
     navigate('/students');
   };
 

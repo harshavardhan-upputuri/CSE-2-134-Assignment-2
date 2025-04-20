@@ -15,7 +15,8 @@ function EditStudent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/students/${id}`).then(res => {
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
+    axios.get(`${backendUrl}/students/${id}`).then(res => {
       setStudent(res.data);
     });
   }, [id]);
@@ -26,7 +27,8 @@ function EditStudent() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/students/${id}`, student);
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
+    await axios.put(`${backendUrl}/students/${id}`, student);
     navigate('/students');
   };
 

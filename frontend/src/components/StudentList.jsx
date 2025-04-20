@@ -13,7 +13,8 @@ function StudentList() {
   };
 
   const fetchStudents = async () => {
-    const res = await axios.get('http://localhost:5000/students');
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
+    const res = await axios.get(`${backendUrl}/students`);
     setStudents(res.data);
   };
 
@@ -22,7 +23,8 @@ function StudentList() {
   }, []);
 
   const deleteStudent = async (id) => {
-    await axios.delete(`http://localhost:5000/students/${id}`);
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
+    await axios.delete(`${backendUrl}/students/${id}`);
     fetchStudents();
   };
 
