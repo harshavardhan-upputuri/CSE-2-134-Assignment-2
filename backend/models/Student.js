@@ -1,14 +1,4 @@
-// import mongoose from 'mongoose';
-
-// const studentSchema = new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   phone: String,
-//   course: String
-// });
-
-// const Student = mongoose.model('Student', studentSchema);
-// export default Student;
+ 
 
 import mongoose from 'mongoose';
 
@@ -33,7 +23,7 @@ const studentSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Valid email regex
+    match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,  
   },
   dob: {
     type: Date,
@@ -42,7 +32,7 @@ const studentSchema = new mongoose.Schema({
   department: {
     type: String,
     required: true,
-    enum: ['Computer Science', 'Electronics', 'Mechanical', 'Civil', 'Other'], // You can add more if needed
+    enum: ['Computer Science', 'Electronics', 'Information Technology','Mechanical', 'Civil', 'Electrical'], 
   },
   enrollmentYear: {
     type: Number,
