@@ -1,7 +1,15 @@
 import React from 'react';
 import { Assets } from '../Assests/Assets';
-
+import { useNavigate } from 'react-router-dom';
+import { FaCogs } from 'react-icons/fa'; 
 const Home = () => {
+  const navigate = useNavigate();
+  const stats = [
+    { number: '100+', label: 'Students Registered' },
+    { number: '6+', label: 'Academic Departments' },
+    { number: '24/7', label: 'System Availability' },
+    { number: '100%', label: 'Data Accuracy' },
+  ];
   return (
     <div className=''>
       <div id="carouselExampleIndicators" className="carousel slide">
@@ -84,8 +92,12 @@ const Home = () => {
 
       {/* Features Section */}
       <div className="container mt-5">
+        <h2 className="text-center mb-5 fw-bold text-primary">
+          <FaCogs className="me-2" /> {/* Icon added here */}
+          Key Features
+        </h2>
         <div className="row text-center">
-          <div className="col-md-4 mb-4">
+          <div className="col-md-4 mb-4" >
             <div className="card shadow-sm h-100 feature-card">
               <div className="card-body">
                 <h5 className="card-title">📄 Register Students</h5>
@@ -96,7 +108,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 mb-4">
+          <div className="col-md-4 mb-4" >
             <div className="card shadow-sm h-100 feature-card">
               <div className="card-body">
                 <h5 className="card-title">📋 View Student List</h5>
@@ -107,7 +119,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 mb-4">
+          <div className="col-md-4 mb-4" >
             <div className="card shadow-sm h-100 feature-card">
               <div className="card-body">
                 <h5 className="card-title">🛠️ Edit & Manage</h5>
@@ -120,6 +132,28 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <div className="container d-flex flex-column justify-content-center align-items-center  bg-light p-5">
+        <h2 className="  fw-bold mb-4">Get Started</h2>
+
+        <div className="d-flex gap-3">
+          <button class="btn btn-primary" type="submit" onClick={() => navigate('/add')}>Add Student</button>
+          <button type="button" className="btn btn-outline-primary" onClick={() => navigate('/students')}>Student List</button>
+
+        </div>
+      </div>
+      <section className="bg-light py-5 mt-5">
+        <div className="container">
+          <div className="row text-center">
+            {stats.map((stat, index) => (
+              <div key={index} className="col-md-3 mb-4">
+                <h2 className="display-5 fw-bold text-primary">{stat.number}</h2>
+                <p className="mb-0 text-dark">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

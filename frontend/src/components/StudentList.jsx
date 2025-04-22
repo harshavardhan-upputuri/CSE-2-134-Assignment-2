@@ -1,4 +1,3 @@
- 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -6,12 +5,6 @@ import { FaUserGraduate, FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 function StudentList() {
   const [students, setStudents] = useState([]);
-
-  // Generate a random color
-  const getRandomColor = () => {
-    const colors = ['#ffcc00', '#00bfff', '#32cd32', '#ff6347', '#8a2be2', '#ff1493'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
 
   const fetchStudents = async () => {
     const backendUrl = import.meta.env.VITE_APP_BACKEND_BASEURL;
@@ -36,62 +29,66 @@ function StudentList() {
         Student List
       </h2>
 
-      <div className="row">
-        {students.length > 0 ? (
-          students.map((student) => (
-            <div key={student._id} className="col-md-4 mb-4">
-              <div className="card shadow-sm border-0 h-100">
-                <div className="card-body text-center">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                    alt="Student Avatar"
-                    className="rounded-circle mb-3"
-                    width="80"
-                    height="80"
-                    style={{
-                      backgroundColor: getRandomColor(),
-                      border: '5px solid #333',
-                    }}
-                  />
-                  <h5 className="card-title fw-bold">
-                    {student.firstName} {student.lastName}
-                  </h5>
-                  <p className="card-text mb-1">
-                    <strong>Email:</strong> {student.email}
-                  </p>
-                  <p className="card-text mb-1">
-                    <strong>Department:</strong> {student.department}
-                  </p>
-                  <p className="card-text mb-1">
-                    <strong>Enrollment Year:</strong> {student.enrollmentYear}
-                  </p>
-                  <p className="card-text">
-                    <strong>Status:</strong>{' '}
+      {students.length > 0 ? (
+        <div className="table-responsive">
+          <table className="table table-striped table-hover align-middle">
+            <thead className="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Enrollment Year</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student, index) => (
+                <tr key={student._id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                      alt="avatar"
+                      width="40"
+                      height="40"
+                      className="rounded-circle border border-dark"
+                    />
+                  </td>
+                  <td>{student.firstName} {student.lastName}</td>
+                  <td>{student.email}</td>
+                  <td>{student.department}</td>
+                  <td>{student.enrollmentYear}</td>
+                  <td>
                     <span className={student.isActive ? 'text-success' : 'text-danger'}>
                       {student.isActive ? 'Active' : 'Inactive'}
                     </span>
-                  </p>
-                  <div className="d-flex justify-content-center gap-2 mt-3">
-                    <Link to={`/edit/${student._id}`} className="btn btn-outline-success btn-sm">
-                      <FaEdit /> Edit
-                    </Link>
-                    <button
-                      className="btn btn-outline-danger btn-sm"
-                      onClick={() => deleteStudent(student._id)}
-                    >
-                      <FaTrashAlt /> Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="text-center mt-5">
-            <p>No students found.</p>
-          </div>
-        )}
-      </div>
+                  </td>
+                  <td>
+                    <div className="d-flex gap-2">
+                      <Link to={`/edit/${student._id}`} className="btn btn-outline-success btn-sm">
+                        <FaEdit /> Edit
+                      </Link>
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteStudent(student._id)}
+                      >
+                        <FaTrashAlt /> Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="text-center mt-5">
+          <p>No students found.</p>
+        </div>
+      )}
     </div>
   );
 }

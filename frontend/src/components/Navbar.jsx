@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Assets } from '../Assests/Assets';
-
+import { FaGraduationCap } from 'react-icons/fa';
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-xl bg-body-tertiary w-100">
             <div className="container-fluid d-flex align-items-center justify-content-between">
 
                 {/* Logo Section */}
-                <Link className="navbar-brand" to="/">
-                    <img src={Assets.cbit} width="350px" height="80px" alt="CBIT Logo" />
+                <Link className="navbar-brand d-flex align-items-center gap-2 text-decoration-none" to="/">
+                    <FaGraduationCap size={32} className="text-primary" />
+                    <span className="fw-bold fs-4 text-dark">CBIT Student Portal</span>
                 </Link>
 
                 {/* Toggler for mobile */}
@@ -37,7 +38,7 @@ const Navbar = () => {
                         <li className="nav-item  hover-effect">
                             <Link className="nav-link " to="/add">Registration</Link>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
